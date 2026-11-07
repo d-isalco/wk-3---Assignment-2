@@ -122,7 +122,7 @@ public class CaveExplorer {
 						"Cave row " + row + "must contain " + cols + "characters.");
 				}
 				
-				line.getChars(0, cols, cave [rows], 0);
+				line.getChars(0, cols, cave[row], 0);
 			}  	
     	} // Construct cave and populate with rest of data in the file
 	}	
