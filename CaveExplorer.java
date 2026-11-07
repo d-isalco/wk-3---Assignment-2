@@ -20,6 +20,7 @@ public class CaveExplorer {
 	}
 	// Step 2: toString method
 	// This method should return a string representation of the cave layout.
+	@Override 
 	public String toString() {
 		StringBuilder layout = new StringBuilder();
 		// Loop through each row of the cave and append it to the layout string
@@ -37,6 +38,7 @@ public class CaveExplorer {
 		for (int row = 0; row < cave.length; row++) {
 			for (int col = 0; col < cave[row].length; col++) {
 				if (cave[row][col] == 'S') {
+					System.out.println("Found S at row " + row + ", col" + col);
 					return false; // Placeholder for actual pathfinding logic
 				}
 			}
