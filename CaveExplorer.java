@@ -160,8 +160,22 @@ public class CaveExplorer {
 		String fileName = "testdat.txt"; 
 		try { 
 			CaveExplorer filExplorer = new CaveExplorer(fileName); 
+			String fileStartingLayout = filExplorer.toString(); 
+			boolean fileFoundPool = filExplorer.solve(); 
+			
 			System.out.println("Starting layout from " + fileName + ":");
+			System.out.println(fileStartingLayout);
+			
+			System.out.println("Final layout: ");
 			System.out.println(filExplorer);
+
+			System.out.println("Reached mirror pool: " + fileFoundPool);
+				if (fileFoundPool) {
+					System.out.println("Path taken: " + filExplorer.getPath());
+				}
+
+			System.out.println("Path matches expected: " + "eeeennnn".equals(filExplorer.getPath()));
+			
 
 		} 
 		catch (FileNotFoundException e ) {
