@@ -105,18 +105,29 @@ public class CaveExplorer {
 	}
 	
 	// Step 5: One parameter constructor to read from a file
-	/*
-	public CaveExplorer (String fname) throws Exception {
-	      Scanner in = new Scanner(new File(fname));
+	
+	public CaveExplorer (String fileName) throws FileNotFoundException {
+	    
+		try (Scanner input = new Scanner(new File(fileName))){
+			int rows = input.nextInt();
+			int cols = input.nextInt();
 
-	      int rows = in.nextInt();
-	      int cols = in.nextInt();  
-    	  String s = in.nextLine(); // Skip newline character
-    	   	  
-    	  // Construct cave and populate with rest of data in the file
-    	  
-	}
-	*/
+			cave = new char[rows][cols];
+			
+			for (int row = 0; row < rows; row++) {
+				String line = input.next();
+
+				if (line.length() != cols) {
+					throw new IllegalArgumentException(
+						"Cave row " + row + "must contain " + cols + "characters.");
+				}
+				
+				line.getChars(0, cols, cave [rows], 0);
+			}  	
+    	} // Construct cave and populate with rest of data in the file
+	}	
+
+	
 
 	
 	public static void main(String[] args) {
@@ -146,11 +157,12 @@ public class CaveExplorer {
 		
 		// Step 5/6: Repeat for a different CaveExplorer object read from a file
 		// Uncomment code below to start testing your 1-parameter constructor
-
-		/*
 		String fileName = "testdat.txt"; 
 		try { 
-			CaveExplorer ce2 = new CaveExplorer(fileName); 
+			CaveExplorer filExplorer = new CaveExplorer(fileName); 
+			System.out.println("Starting layout from " + fileName + ":");
+			System.out.println(filExplorer);
+
 		} 
 		catch (FileNotFoundException e ) {
 			System.out.println("Can't find file " + fileName); 
@@ -158,7 +170,7 @@ public class CaveExplorer {
 		catch (Exception e) {
 			System.out.println("Other error: " + e.getMessage());
 		}
-		*/
+		
 		
 		System.out.println("Finished CaveExplorer");
 	}
