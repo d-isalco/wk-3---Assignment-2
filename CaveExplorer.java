@@ -5,7 +5,10 @@ import java.util.Scanner;
 public class CaveExplorer {
 	// Step 1: Zero parameter constructor to create the specified cave
 	private char [][] cave;
-
+	// The cave layout is represented as a 2D array of characters, where:
+	// 'R' represents a rock (an impassable cell)
+	// 'S' represents the start position
+	// 'E' represents the end position
 	public CaveExplorer() {
 		cave = new char [][] {
 			"RRRRRR".toCharArray(),
@@ -16,18 +19,30 @@ public class CaveExplorer {
 		};
 	}
 	// Step 2: toString method
-	
+	// This method should return a string representation of the cave layout.
 	public String toString() {
 		StringBuilder layout = new StringBuilder();
-
+		// Loop through each row of the cave and append it to the layout string
 		for (char[] row : cave) {
 			layout.append(row);
 			layout.append("\n");
 		}
-
+		// Remove the last newline character for cleaner output
 		return layout.toString();
 	}
 	// Step 3: solve method
+	// This method should return true if there is a path from the start to the end, 
+	// and false otherwise.
+	public boolean solve() {
+		for (int row = 0; row < cave.length; row++) {
+			for (int col = 0; col < cave[row].length; col++) {
+				if (cave[row][col] == 'S') {
+					return false; // Placeholder for actual pathfinding logic
+				}
+			}
+		}
+		return false;
+	}
 	
 	// Step 4: getPath method
 	
@@ -58,6 +73,7 @@ public class CaveExplorer {
 		System.out.println("Layout matches expected: " + expected.equals(startingLayout));
 
 		// Call solve
+		explorer.solve();
 		
 		// Print the final layout, whether there is a path, and if so, what it is.
 		
