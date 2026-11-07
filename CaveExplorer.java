@@ -43,6 +43,32 @@ public class CaveExplorer {
 		char square = cave[row][col];
 		return square == '.' || square == 'M';
 	}
+	// This method should return true if there is a path from the start to the end,
+	// and false otherwise.
+	private boolean walkFrom(int row, int col) {
+		while (cave[row][col] != 'M') {
+			int nextRow = row;
+			int nextCol = col;
+
+			if(canMoveto(row - 1, col)) { // North
+				nextRow--; 
+			} else if(canMoveto(row + 1, col)) { // South
+				nextRow++;
+			} else if(canMoveto(row, col -1)){ // West
+				nextCol--;
+			} else if(canMoveto(row, col + 1)){ // East
+				nextCol++;
+			} else {
+				return false; // No valid moves available
+			}
+			
+			cave[row][col] = '*'; // Mark the path
+			row = nextRow;
+			col = nextCol;
+		}
+		return true; // Reached the end
+	}
+
 	// This method should return true if there is a path from the start to the end, 
 	// and false otherwise.
 	// it will just print out the possible moves from the start position.
@@ -50,12 +76,12 @@ public class CaveExplorer {
 		for (int row = 0; row < cave.length; row++) {
 			for (int col = 0; col < cave[row].length; col++) {
 				if (cave[row][col] == 'S') {
-					System.out.println("Found S at row " + row + ", col" + col);
-					System.out.println("North: " + canMoveto(row - 1, col));
-					System.out.println("South: " + canMoveto(row + 1, col));
-					System.out.println("West: " + canMoveto(row, col - 1));
-					System.out.println("East: " + canMoveto(row, col + 1));
-					return false; // Placeholder for actual pathfinding logic
+					//System.out.println("Found S at row " + row + ", col" + col);
+					//System.out.println("North: " + canMoveto(row - 1, col));
+					//System.out.println("South: " + canMoveto(row + 1, col));
+					//System.out.println("West: " + canMoveto(row, col - 1));
+					//System.out.println("East: " + canMoveto(row, col + 1));
+					return walkFrom(row, col); // Start walking from the start position
 				}
 			}
 		}
@@ -91,8 +117,12 @@ public class CaveExplorer {
 		System.out.println("Layout matches expected: " + expected.equals(startingLayout));
 
 		// Call solve
-		explorer.solve();
-		
+		//explorer.solve();
+		boolean foundPool = explorer.solve();
+		System.out.println("Final layout: ");
+		System.out.println(explorer);
+		System.out.println("Reached mirror pool: " + foundPool);
+
 		// Print the final layout, whether there is a path, and if so, what it is.
 		
 		// Step 5/6: Repeat for a different CaveExplorer object read from a file
