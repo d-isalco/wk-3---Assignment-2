@@ -163,7 +163,7 @@ public class CaveExplorer {
 			String fileStartingLayout = filExplorer.toString(); 
 			boolean fileFoundPool = filExplorer.solve(); 
 			
-			System.out.println("Starting layout from " + fileName + ":");
+			System.out.println("\nStarting layout from " + fileName + ":");
 			System.out.println(fileStartingLayout);
 			
 			System.out.println("Final layout: ");
@@ -180,7 +180,7 @@ public class CaveExplorer {
 			String blockedStart = blockedExplorer.toString();
 			boolean blockedFoundPool = blockedExplorer.solve();
 
-			System.out.println("Starting layout from blocked.txt:");
+			System.out.println("\nStarting layout from blocked.txt:");
 			System.out.println(blockedStart);
 			System.out.println("Final layout: ");
 			System.out.println(blockedExplorer);
