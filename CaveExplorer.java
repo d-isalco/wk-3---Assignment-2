@@ -17,6 +17,16 @@ public class CaveExplorer {
 	}
 	// Step 2: toString method
 	
+	public String toString() {
+		StringBuilder layout = new StringBuilder();
+
+		for (char[] row : cave) {
+			layout.append(row);
+			layout.append("\n");
+		}
+
+		return layout.toString();
+	}
 	// Step 3: solve method
 	
 	// Step 4: getPath method
@@ -41,9 +51,12 @@ public class CaveExplorer {
 		
 		// Create a CaveExplorer object and print the starting layout
 		CaveExplorer explorer = new CaveExplorer();
-			for (char[] row : explorer.cave){
-				System.out.println(row);
-			}
+		String startingLayout = explorer.toString();
+		System.out.println(startingLayout);
+
+		String expected = "RRRRRR\nR..SRR\nR.RRRR\nR.MRRR\nRRRRRR\n";
+		System.out.println("Layout matches expected: " + expected.equals(startingLayout));
+
 		// Call solve
 		
 		// Print the final layout, whether there is a path, and if so, what it is.
@@ -63,10 +76,7 @@ public class CaveExplorer {
 			System.out.println("Other error: " + e.getMessage());
 		}
 		*/
-		 
-
 		
 		System.out.println("Finished CaveExplorer");
 	}
-
 }
