@@ -32,13 +32,29 @@ public class CaveExplorer {
 		return layout.toString();
 	}
 	// Step 3: solve method
+	public boolean canMoveto(int row, int col) {
+		if (row < 0 || row >= cave.length) {
+			return false; // Out of bounds
+		}
+		if (col < 0 || col >= cave[row].length) {
+			return false; // Out of bounds
+		}
+
+		char square = cave[row][col];
+		return square == '.' || square == 'M';
+	}
 	// This method should return true if there is a path from the start to the end, 
 	// and false otherwise.
+	// it will just print out the possible moves from the start position.
 	public boolean solve() {
 		for (int row = 0; row < cave.length; row++) {
 			for (int col = 0; col < cave[row].length; col++) {
 				if (cave[row][col] == 'S') {
 					System.out.println("Found S at row " + row + ", col" + col);
+					System.out.println("North: " + canMoveto(row - 1, col));
+					System.out.println("South: " + canMoveto(row + 1, col));
+					System.out.println("West: " + canMoveto(row, col - 1));
+					System.out.println("East: " + canMoveto(row, col + 1));
 					return false; // Placeholder for actual pathfinding logic
 				}
 			}
