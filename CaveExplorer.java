@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class CaveExplorer {
 	// Step 1: Zero parameter constructor to create the specified cave
 	private char [][] cave;
+
+	private String path = ""; // This will hold the path taken to reach the end position
+
 	// The cave layout is represented as a 2D array of characters, where:
 	// 'R' represents a rock (an impassable cell)
 	// 'S' represents the start position
@@ -46,18 +49,25 @@ public class CaveExplorer {
 	// This method should return true if there is a path from the start to the end,
 	// and false otherwise.
 	private boolean walkFrom(int row, int col) {
+
+		StringBuilder moves = new StringBuilder();
+
 		while (cave[row][col] != 'M') {
 			int nextRow = row;
 			int nextCol = col;
 
 			if(canMoveto(row - 1, col)) { // North
 				nextRow--; 
+				moves.append('n'); // Append 'n' for north move
 			} else if(canMoveto(row + 1, col)) { // South
 				nextRow++;
+				moves.append('s');// Append 's' for south move
 			} else if(canMoveto(row, col -1)){ // West
 				nextCol--;
+				moves.append('w');// Append 'w' for west move
 			} else if(canMoveto(row, col + 1)){ // East
 				nextCol++;
+				moves.append('e');// Append 'e' for east move
 			} else {
 				return false; // No valid moves available
 			}
@@ -66,6 +76,7 @@ public class CaveExplorer {
 			row = nextRow;
 			col = nextCol;
 		}
+		path = moves.toString(); // Store the path taken
 		return true; // Reached the end
 	}
 
@@ -89,6 +100,9 @@ public class CaveExplorer {
 	}
 	
 	// Step 4: getPath method
+	public String getPath(){
+		return path;
+	}
 	
 	// Step 5: One parameter constructor to read from a file
 	/*
@@ -119,11 +133,16 @@ public class CaveExplorer {
 		// Call solve
 		//explorer.solve();
 		boolean foundPool = explorer.solve();
+
+		// Print the final layout, whether there is a path, and if so, what it is.
 		System.out.println("Final layout: ");
 		System.out.println(explorer);
 		System.out.println("Reached mirror pool: " + foundPool);
 
-		// Print the final layout, whether there is a path, and if so, what it is.
+		System.out.println("Path taken; " + explorer.getPath());
+		(System.out).println("Path matches expected: " + "wwsse".equals(explorer.getPath()));
+
+
 		
 		// Step 5/6: Repeat for a different CaveExplorer object read from a file
 		// Uncomment code below to start testing your 1-parameter constructor
