@@ -173,10 +173,19 @@ public class CaveExplorer {
 				if (fileFoundPool) {
 					System.out.println("Path taken: " + filExplorer.getPath());
 				}
-
 			System.out.println("Path matches expected: " + "eeeennnn".equals(filExplorer.getPath()));
 			
+			//adding blocked path test
+			CaveExplorer blockedExplorer = new CaveExplorer("blocked.txt");
+			String blockedStart = blockedExplorer.toString();
+			boolean blockedFoundPool = blockedExplorer.solve();
 
+			System.out.println("Starting layout from blocked.txt:");
+			System.out.println(blockedStart);
+			System.out.println("Final layout: ");
+			System.out.println(blockedExplorer);
+			System.out.println("Reached mirror pool: " + blockedFoundPool);
+			System.out.println("Path is empty: " + blockedExplorer.getPath().isEmpty());
 		} 
 		catch (FileNotFoundException e ) {
 			System.out.println("Can't find file " + fileName); 
